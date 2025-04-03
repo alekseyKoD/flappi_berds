@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /** {@link ApplicationListener} implementation shared by all platforms. */
 public class geme extends ApplicationAdapter {
@@ -22,15 +23,23 @@ public class geme extends ApplicationAdapter {
     float g;
     float t;
 
-    int gameSpeed=800;
+    int gameSpeed=300;
     private SpriteBatch batch;
     Fone fone;
     Plaere pl;
     List<Trube> gameTrubes=new ArrayList<>();
-    Trube trube1;
-    Trube trube2;
+
+    Trube bottomTrube;
+
+    int trubeHeight=935;
+    int trubeWidth=250;
+
     int spaceBetweenTrudes=600;
     int gamescreenWidth=1980;
+
+
+
+
     @Override
     public void create() {//инитилизация
 
@@ -42,10 +51,14 @@ public class geme extends ApplicationAdapter {
 
         for (int i = 0; i < gamescreenWidth/spaceBetweenTrudes+1; i++) {
 
-            gameTrubes.add(
-                new Trube(new Texture("g1.png"),new Vector2(gamescreenWidth+spaceBetweenTrudes*i,0),gameSpeed) );
+             bottomTrube=new Trube(new Texture("g_new.png"),
+                                        new Vector2(gamescreenWidth+spaceBetweenTrudes*i,0),
+                                        gameSpeed);
+            bottomTrube.setRandomYPosition(300);
+            gameTrubes.add(bottomTrube);
+            System.out.printf("%f - %f",bottomTrube.position.y,bottomTrube.tempPosition.y);
      }
-        System.out.println(gameTrubes.size());
+
     }
 
     @Override
