@@ -22,6 +22,9 @@ public class Trube {
     // константа устанавливает примерный отрисовку текстуры по центру экрана
     final int OFFSET_Y=950;
 
+    // величина изменения координяты y при создании трубы
+    final int RND_RANGE=200;
+
     Random rndOffsetY=new Random();
 
 
@@ -39,10 +42,10 @@ public class Trube {
         this.texture = texture;
         this.position = position;
         this.trubSpeed = trubSpeed;
-        this.position.y= position.y-OFFSET_Y;
+        this.position.y= position.y-OFFSET_Y+this.rndOffsetY.nextInt(-RND_RANGE, RND_RANGE);
 
         this.tempTexture=new Texture("r2.png");
-        this.tempPosition=new Vector2(this.position.x+100,position.y+bottomBorder);
+        this.tempPosition=new Vector2(this.position.x,this.position.y+bottomBorder);
 
 
 
@@ -57,22 +60,14 @@ public class Trube {
        batch.draw(texture, position.x, position.y);
        batch.draw(tempTexture, tempPosition.x,tempPosition.y);
 
-
-
-
     }
 
-    public void setRandomYPosition(int yCoordOffset){
-        // yCoordOffset - сдвиг по координате y  для определения стартовой точки отрисовки
-        this.position.y+=this.rndOffsetY.nextInt(-yCoordOffset, yCoordOffset);
-
-    }
     public void update(float dt) {
         position.x -= trubSpeed * dt;
         tempPosition.x-=trubSpeed*dt;
         if (position.x < -(trubeWidth+50) ){
             position.x = 2300;
-
+            tempPosition.x=2300;
         }
     }
 }

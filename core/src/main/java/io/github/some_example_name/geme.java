@@ -54,7 +54,7 @@ public class geme extends ApplicationAdapter {
              bottomTrube=new Trube(new Texture("g_new.png"),
                                         new Vector2(gamescreenWidth+spaceBetweenTrudes*i,0),
                                         gameSpeed);
-            bottomTrube.setRandomYPosition(300);
+          //  bottomTrube.setRandomYPosition(200);
             gameTrubes.add(bottomTrube);
             System.out.printf("%f - %f",bottomTrube.position.y,bottomTrube.tempPosition.y);
      }
